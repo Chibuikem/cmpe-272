@@ -1,5 +1,4 @@
 //bookController.js
-
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
@@ -8,7 +7,7 @@ router.use(bodyParser.json());
 
 var Book = require('./book');
 
-//CREATES A NEW BOOK
+//CREATES A SINGLE BOOK
 router.post('/', function (req, res) {
     Book.create({
             isbn : req.body.isbn,
@@ -23,22 +22,37 @@ router.post('/', function (req, res) {
         });
 });
 
-//GETS A SINGLE BOOK FROM THE DATABASE BY ISBN
-router.get('/:isbn', function (req, res) {
-    Book.findOne(req.params.isbn, function (err, book) {
+//GETS A BOOK BY ID
+router.get('/:id', function (req, res) {
+    Book.findById(req.params.id, function (err, book) {
         if (err) return res.status(500).send("There was a problem finding the book.");
         if (!book) return res.status(404).send("No book found.");
         res.status(200).send(book);
     });
 });
 
-
-
-//RETURNS ALL THE BOOKS IN THE DATABASE
+//GETS ALL BOOKS
 router.get('/', function (req, res) {
-    Book.find({}, function (err, books) {
-        if (err) return res.status(500).send("There was a problem finding the books.");
-        res.status(200).send(books);
+    Book.find({}, function (err, book) {
+        if (err) return res.status(500).send("There was a problem finding the book.");
+        res.status(200).send(book);
+    });
+});
+
+//DELETES A BOOK
+router.delete('/:id', function (req, res) {
+    Book.findByIdAndRemove(req.params.id, function (err, book) {
+        if (err) return res.status(500).send("There was a problem deleting the book.");
+        res.status(200).send("Book "+ book.name +" was deleted.");
+    });
+});
+
+//UPDATES A BOOK
+router.put('/:id', function (req, res) {
+    
+    Book.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, book) {
+        if (err) return res.status(500).send("There was a problem updating the book.");
+        res.status(200).send(book);
     });
 });
 
