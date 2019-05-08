@@ -23,7 +23,6 @@ router.post('/', function (req, res) {
 
 //UPDATES AN INVENTORY IN THE DATABASE
 router.put('/:id', function (req, res) {
-    
     Inventory.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, inventory) {
         if (err) return res.status(500).send("There was a problem updating the inventory.");
         res.status(200).send(inventory);
@@ -35,6 +34,23 @@ router.get('/', function (req, res) {
     Inventory.find({}, function (err, inventory) {
         if (err) return res.status(500).send("There was a problem finding inventory.");
         res.status(200).send(inventory);
+    });
+});
+
+//GETS AN ITEM IN THE INVENTORY BY ID
+router.get('/:id', function (req, res) {
+    Inventory.findById(req.params.id, function (err, inventory) {
+        if (err) return res.status(500).send("There was a problem finding the item in inventory.");
+        if (!inventory) return res.status(404).send("No Item found.");
+        res.status(200).send(inventory);
+    });
+});
+
+//DELETES AN INVENTORY ENTRY
+router.delete('/:id', function (req, res) {
+    Inventory.findByIdAndRemove(req.params.id, function (err, inventory) {
+        if (err) return res.status(500).send("There was a problem deleting the inventory.");
+        res.status(200).send("Inventory "+ inventory.name +" was deleted.");
     });
 });
 
