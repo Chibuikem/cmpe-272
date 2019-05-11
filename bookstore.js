@@ -3,6 +3,8 @@ var express = require('express');
 var bookstore = express();
 var db = require('./db');
 
+bookstore.use(express.static('public'));
+
 var bookController = require('./bookController');
 bookstore.use('/book', bookController);
 var customerController = require('./customerController');
