@@ -1,0 +1,38 @@
+{{# if books}}
+    <br>
+    <div class="container">
+        <ul class="list-group">
+            {{# each books }}
+                <li class="class list-group-item">
+                    <span class="badge">{{ this.qty }}</span>
+                    <strong>{{ this.item.title }}</strong>
+                    <span class="label label-success">${{ this.price }}</span>
+                    <div class="btn-group">
+                        <button class="nav-link btn btn-primary btn-xs dropdown-toggle" type="button" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Manage Item <span class="caret"></span></button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Reduce By 1</a></li>
+                            <li><a class="dropdown-item" href="#">Remove All</a></li>
+                        </ul>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <br>
+    <div class="container">
+    <strong>Total: {{totalPrice}}</strong>
+    </div>
+    <br>
+    <div class="container">
+        {{# if login}}
+        <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+        {{else}}
+        <p>Please Login or Sign-up to complete your order.</p>
+        {{/if}}
+    </div>
+    <br>
+{{ else }}
+    <div class="container">
+        <h2>No Items in Cart</h2>
+    </div>
+{{/if}}

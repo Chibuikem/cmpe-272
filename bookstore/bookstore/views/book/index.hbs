@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+{{# each books}}
+  <div class="container">
+    <div class="row">
+      {{# each this}}
+       <div class="col-sm">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ this.imagePath }}" class="card-img-top img-responsive" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ this.title }}</h5>
+              <p class="price">${{ this.price }}</p>
+              <a href="/add-to-cart/{{this._id}}" class="btn btn-success">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <br>
+  </div>
+{{/each}}
