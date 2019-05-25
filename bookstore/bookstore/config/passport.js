@@ -27,6 +27,7 @@ passport.use('local.signup', new LocalStrategy({
         });
         return done(null, false, req.flash('error', messages));
     }
+    
     User.findOne({'email': email}, function(err, user) {
         if (err) {
             return done(err);
@@ -43,8 +44,9 @@ passport.use('local.signup', new LocalStrategy({
             }
             return done(null, newUser);
         });
-
+        
     });
+    
 }));
 
 passport.use('local.signin', new LocalStrategy({
@@ -62,6 +64,7 @@ passport.use('local.signin', new LocalStrategy({
         });
         return done(null, false, req.flash('error', messages));
     }
+    
     User.findOne({'email': email}, function(err, user) {
         if (err) {
             return done(err);
@@ -74,4 +77,5 @@ passport.use('local.signin', new LocalStrategy({
         }
         return done(null, user);        
     });
+    
 }));
