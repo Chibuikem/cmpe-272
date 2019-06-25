@@ -2,7 +2,7 @@ var Book = require('../models/book');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://cajuluokeke:Onyeabacha1%24@test-cluster-qau7u.mongodb.net/test?retryWrites=true' , { useNewUrlParser: true });
+mongoose.connect(/* Your MongDB connection String */ , { useNewUrlParser: true });
 
 var books = [
     new Book({
