@@ -16,7 +16,7 @@ var userRouter = require('./routes/user');
 
 var app = express();
 
-mongoose.connect('mongodb+srv://cajuluokeke:Onyeabacha1%24@test-cluster-qau7u.mongodb.net/test?retryWrites=true' , { useNewUrlParser: true });
+mongoose.connect(/* Your MongoDB Connection String */ , { useNewUrlParser: true });
 require('./config/passport');
 
 // view engine setup
