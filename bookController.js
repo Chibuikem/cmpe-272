@@ -49,7 +49,6 @@ router.delete('/:id', function (req, res) {
 
 //UPDATES A BOOK
 router.put('/:id', function (req, res) {
-    
     Book.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, book) {
         if (err) return res.status(500).send("There was a problem updating the book.");
         res.status(200).send(book);
